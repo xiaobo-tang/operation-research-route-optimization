@@ -1,12 +1,4 @@
 function [bestAnt,pheromone,eta,objPlot,bottom]=ACO(arcMat,fleet,maxTime)
-%ACO Generates a set of routes using ant colony optimization.
-%   A set of routes is built by each ant in a colony, using a randomized
-%   template as a cutoff limit and the beginning of a new route. Inputs are
-%   an arcMat struct containing a 3D spare time matrix, a fleet struct with
-%   robot parameters, and a maximum desired run time. Outputs the best
-%   solution (routes) found, a matrix of peheromone values, a matrix of
-%   heuristic values (eta), a record of the objective function over time,
-%   and the lowest value in the initial spare time matrix (bottom).
 
 ACOTimer=tic;
 objPlot=zeros(10000,3); %store objective function values for plotting
@@ -21,7 +13,7 @@ nNodes=size(arcMat.p,1);
 nSensors=size(arcMat.p,2);
 nRobots=size(arcMat.p,3);
 
-%CHOOSE the following values as desired%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%CHOOSE the following values as desired
 nAnts=100; %number of ants to use
 Q=1/10000; %normalization constant
 % R=1/10000;
@@ -29,7 +21,6 @@ pheromoneInitial=10e-6; %initial nonzero pheromone value
 pie=1; %importance weight of pheromone value
 sigma=1; %importance weight of heuristic value
 rho=0.05; %pheromone evaporation rate
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %heuristic value of each element (arc) in the problem
 %OPTION 1:
@@ -154,4 +145,3 @@ end
 objPlot=objPlot(any(objPlot,2),:); %eliminate empty rows
 
 end
-
